@@ -23,6 +23,8 @@
 		model : RoutePoint
 	});
 	
+	var route = new Route;
+	
 	//Views
 	
 	var clearApp = function(el) {
@@ -54,10 +56,45 @@
 		},
 		
 		createNewRoutePoint: function() {
-			
+			var createRoutePointView =  new CreateRoutePointView;
 		}
 		
 	
+	});
+	
+	var CreateRoutePointView = Backbone.View.extend({
+		el: $('#ajaApp'),
+		
+		events: {
+			'click button#create' : 'createRoutePoint'
+		},
+		
+		initialize: function() {
+			_.bindAll(this, 'render');
+			this.render();
+		},
+		
+		render: function() {
+			var self = this;
+			clearApp(this.el);
+			$(this.el).append('<input type="text" size="25" id="question" placeholder="Kysymyksesi">');
+			$(this.el).append('<input type="text" size="25" id="answer" placeholder="Vastauksesi">');
+			$(this.el).append('<button id="create">Luo reittipiste</button>');
+		},
+		
+		createRoutePoint: function() {
+			var routePoint = new RoutePoint();
+			
+			routePoint.set({
+				question : $('input#question').val(),
+				answer : $('input#answer').val()
+			});
+			
+			route.add(routePoint);
+			
+			var indexView = new IndexView;
+		}
+		
 	});
 	
 	var RouteView = Backbone.View.extend({
@@ -75,7 +112,7 @@
 				answer : 'AJA!'
 			});
 			
-			var routePoint2 = new RoutePoint();
+			/* var routePoint2 = new RoutePoint();
 			routePoint2.set({
 				question : 'What is your favourite color?',
 				answer : 'Blue'
@@ -97,15 +134,15 @@
 			routePoint5.set({
 				question : 'What is your quest?',
 				answer : 'AJA!'
-			});
+			}); */
 			
 			_.bindAll(this, 'render', 'checkAnswer', 'askQuestion');
-			this.collection = new Route();
+			this.collection = route;
 			this.collection.add(routePoint1);
-			this.collection.add(routePoint2);
+			/* this.collection.add(routePoint2);
 			this.collection.add(routePoint3);
 			this.collection.add(routePoint4);
-			this.collection.add(routePoint5);
+			this.collection.add(routePoint5); */
 			
 			//this.collection.bind('add', this.appendRoutePoint);
 			
