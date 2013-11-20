@@ -105,47 +105,9 @@
 		},
 		
 		initialize: function() {
-			this.counter = 0;
-			var routePoint1 = new RoutePoint();
-			routePoint1.set({
-				question : 'What is your quest?',
-				answer : 'AJA!'
-			});
-			
-			/* var routePoint2 = new RoutePoint();
-			routePoint2.set({
-				question : 'What is your favourite color?',
-				answer : 'Blue'
-			});
-			
-			var routePoint3 = new RoutePoint();
-			routePoint3.set({
-				question : 'What is the land speed of an unburdened swallow?',
-				answer : 'African, or european?'
-			});
-			
-			var routePoint4 = new RoutePoint();
-			routePoint4.set({
-				question : 'What is your quest?',
-				answer : 'AJA!'
-			});
-			
-			var routePoint5 = new RoutePoint();
-			routePoint5.set({
-				question : 'What is your quest?',
-				answer : 'AJA!'
-			}); */
 			
 			_.bindAll(this, 'render', 'checkAnswer', 'askQuestion');
 			this.collection = route;
-			this.collection.add(routePoint1);
-			/* this.collection.add(routePoint2);
-			this.collection.add(routePoint3);
-			this.collection.add(routePoint4);
-			this.collection.add(routePoint5); */
-			
-			//this.collection.bind('add', this.appendRoutePoint);
-			
 			this.render();
 		},
 		
@@ -157,10 +119,7 @@
 			$(this.el).append('<input type="text" size="25" id="answer" placeholder="Vastauksesi">');
 			$(this.el).append('<button id="answer">Anna vastauksesi</button>');
 			$(this.el).append('<ul></ul>');
-			this.askQuestion(this.counter);
-/* 			_(this.collection.models).each(function(item) {
-				self.appendRoutePoint(item);
-			}, this); */
+			this.askQuestion(Math.floor(Math.random()*this.collection.length));
 		},
 		
 		
