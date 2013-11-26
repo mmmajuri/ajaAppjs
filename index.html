@@ -13,7 +13,21 @@
 		<script src="lib/json2.js"></script>
 		<script src="lib/underscore.js"></script>
 		<script src="lib/backbone.js"></script>
-		<script src="ajaApp.js"></script>
+		<script src="app/RoutePoint.js"></script>
+		<script src="app/Route.js"></script>
+		
+		<!-- Bootstrap -->
+		
+		<script>
+			var route = new Route([
+				{id: 1, question: '1', answer: '2'},
+				{id: 2, question: '2', answer: '3'},
+				{id: 3, question: '3', answer: '4'},
+				{id: 4, question: '4', answer: '5'},
+				{id: 5, question: '5', answer: '6'},
+				{id: 6, question: '6', answer: '7'},
+			]);
+		</script>
 		
 		<!-- templates -->
 		
@@ -24,6 +38,8 @@
 				<button id="answer">Anna vastauksesi</button>
 			</div>
 		</script>
+		
+		<script src="ajaApp.js"></script>
 		
 	</body>
 </html>

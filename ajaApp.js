@@ -7,23 +7,6 @@
 			msg = msg + key + ' : ' + object[key] + '\n';
 		}
 	}
-
-	//Models
-
-	var RoutePoint = Backbone.Model.extend({
-		defaults: {
-			question: 'Question',
-			answer: 'Answer'
-		}
-	});
-	
-	//Collections
-	
-	var Route = Backbone.Collection.extend({
-		model : RoutePoint
-	});
-	
-	var route = new Route;
 	
 	//Views
 	
@@ -97,6 +80,18 @@
 		
 	});
 	
+	var RoutePointView = Backbone.View.extend({
+		el: $('#route'),
+		
+		template: _.template($("#routePoint").html()),
+		
+		render: function() {
+			
+		
+		}
+	
+	});
+	
 	var RouteView = Backbone.View.extend({
 		el: $('#ajaApp'),
 		
@@ -109,27 +104,32 @@
 			_.bindAll(this, 'render', 'checkAnswer', 'askQuestion');
 			this.collection = route;
 			this.render();
+			this.routePoint = new RoutePoint;
 		},
 		
 		render: function() {
 			clearApp(this.el);
 			var self = this;
+			var rand = Math.floor(Math.random()*this.collection.length);
+			
+			alert('render::' + rand + ' ' + this.collection.length);
 			
 			$(this.el).append('<h1 id="question"></h1>');
 			$(this.el).append('<input type="text" size="25" id="answer" placeholder="Vastauksesi">');
 			$(this.el).append('<button id="answer">Anna vastauksesi</button>');
 			$(this.el).append('<ul></ul>');
-			this.askQuestion(Math.floor(Math.random()*this.collection.length));
+			this.askQuestion(rand);
 		},
 		
 		
 		checkAnswer: function() {
 			var guess = $('input#answer').val();
-			var answer = this.collection.at(this.counter).get('answer');
+			var answer = this.routePoint.get('answer');
+			
+			alert('checkAnswer::' + guess + ' ' + this.routePoint.get('answer'));
 			
 			if (guess == answer) {
-				this.counter = this.counter + 1;
-				this.askQuestion(this.counter);
+				this.askQuestion(Math.floor(Math.random()*this.collection.length));
 			}
 			
 			this.clearAnswerField();
@@ -141,6 +141,9 @@
 		
 		askQuestion: function(questionNumber) {
 			var routePoint = this.collection.at(questionNumber);
+			this.routePoint = routePoint;
+			
+			alert('askQuestion::' + this.routePoint.get('question') + ' ' + this.routePoint.get('answer'));
 			
 			$('h1#question').empty();
 			$('h1#question').append(routePoint.get('question'));
