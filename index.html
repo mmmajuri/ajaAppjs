@@ -15,6 +15,7 @@
 		<script src="lib/backbone.js"></script>
 		<script src="app/RoutePoint.js"></script>
 		<script src="app/Route.js"></script>
+		<script src="app/RouteView.js"></script>
 		
 		<!-- Bootstrap -->
 		
@@ -31,12 +32,20 @@
 		
 		<!-- templates -->
 		
-		<script type="text/template" id="routePoint">
-			<div class="routePoint">
-				<strong><=% question %></strong>
-				<input type="text" size="25" id="answer" placeholder="Vastauksesi" />
-				<button id="answer">Anna vastauksesi</button>
-			</div>
+		<script type="text/template" id="routePointTemplate">
+			
+		</script>
+		
+		<script type="text/template" id="routeTemplate">
+			<ul class="route">
+				<% route.each(function(routePoint) { %>
+					<li>
+						<strong><%= routePoint.get("question") %></strong>
+						<input type="text" size="25" id="answer" placeholder="Vastauksesi" />
+						<button id="answer" value="<%= routePoint.get("id") %>">Anna vastauksesi</button>
+					</li> 
+				<% }); %>
+			</ul>
 		</script>
 		
 		<script src="ajaApp.js"></script>
