@@ -9,12 +9,14 @@
 	</head>
 	<body>
 		<div id="ajaApp"></div>
+		<div id="route"></div>
 		<script src="lib/jquery.js"></script>
 		<script src="lib/json2.js"></script>
 		<script src="lib/underscore.js"></script>
 		<script src="lib/backbone.js"></script>
 		<script src="app/RoutePoint.js"></script>
 		<script src="app/Route.js"></script>
+		<script src="app/RoutePointView.js"></script>
 		<script src="app/RouteView.js"></script>
 		
 		<!-- Bootstrap -->
@@ -33,19 +35,17 @@
 		<!-- templates -->
 		
 		<script type="text/template" id="routePointTemplate">
-			
+			<div>
+				<strong><%= routePoint.get("question") %></strong>
+				<input type="text" size="25" id="guess" placeholder="Vastauksesi" />
+				<button class="guess" id="<%= routePoint.get("id") %>">Anna vastauksesi</button>
+			</div> 	
 		</script>
 		
 		<script type="text/template" id="routeTemplate">
-			<ul class="route">
 				<% route.each(function(routePoint) { %>
-					<li>
-						<strong><%= routePoint.get("question") %></strong>
-						<input type="text" size="25" id="answer" placeholder="Vastauksesi" />
-						<button id="answer" value="<%= routePoint.get("id") %>">Anna vastauksesi</button>
-					</li> 
+					<% var routePointView = new RoutePointView({model: routePoint}); %>
 				<% }); %>
-			</ul>
 		</script>
 		
 		<script src="ajaApp.js"></script>
