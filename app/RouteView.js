@@ -1,6 +1,8 @@
 var RouteView = Backbone.View.extend({
 	el: $('#ajaApp'),
 	
+	template: $("#routeTemplate"),
+	
 	events: {
 	},
 	
@@ -12,8 +14,9 @@ var RouteView = Backbone.View.extend({
 	
 	render: function() {	
 		var template = _.template( $("#routeTemplate").html(), {
-			route: route
+			route: this.collection
 		});
 		this.$el.html(template);
+		return this;
 	}
 });

@@ -1,7 +1,6 @@
 var RoutePointView = Backbone.View.extend({
-	el: $('#route'),
 	events: {
-		'click guess.answer' : 'checkAnswer'
+		'click button' : 'checkAnswer'
 	},
 	
 	initialize: function() {
@@ -14,20 +13,22 @@ var RoutePointView = Backbone.View.extend({
 		var template = _.template( $("#routePointTemplate").html(), {
 			routePoint: this.model
 		});	
-		this.$el.append(template);
+		$(this.el).append(template);
+		return this;
 	},
 	
 	checkAnswer: function() {
+		var element = 'input#' + this.model.get('id');
 		var reply = false;
 		var answer = this.model.get('answer');
-		var guess = $(this.el + 'input#guess').val();
+		var guess = $(element).val();
 		
 		if (answer == guess) {
 			reply = true;
 		}
 		
-		this.trigger('isAnswerCorrect', reply);
-		alert(reply);
+		//this.trigger('isAnswerCorrect', reply);
+		console.log(reply);
 	}
 
 });
